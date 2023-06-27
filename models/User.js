@@ -37,7 +37,7 @@ const userSchema = new Schema(
   },
   {
     toJSON: {
-      // Mongoose will not include virtuals by default, so a `virtuals` property is added and set it's value to true
+      // Mongoose will not include virtuals by default, so a `virtuals` property is added and it's value is set to true
       virtuals: true,
       getters: true,
     },
