@@ -1,6 +1,7 @@
 // This is NOT a model, but rather is used as the reaction field's subdocument schema in the Thought model.
 
 const { Schema, Types } = require('mongoose');
+// Importing moment to utlize it to convert date/timestamp
 const moment = require('moment');
 
 // Creating the Reaction schema
