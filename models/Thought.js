@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+// Exporting the Reaction schema to use in the Thought model
 const reactionSchema = require('./Reaction');
 // Importing moment to utlize it to convert date/timestamp
 const moment = require('moment');
