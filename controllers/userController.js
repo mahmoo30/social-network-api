@@ -1,16 +1,15 @@
 const { Thought } = require('../models');
 const User = require('../models/User');
 
-// Export User methods 
 module.exports = {
-  //get all users
+  // GET ALL users
   getUsers(req, res) {
     User.find({})
       .then(dbUserData => res.json(dbUserData))
       .catch(err => res.status(500).json(err));
   },
   
-  //get a single user by Id
+  // GET a SINGLE user by ID
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
     .populate("thoughts")
@@ -18,7 +17,7 @@ module.exports = {
     .select("-__v")
       .then(dbUserData => {
         if(!dbUserData) {
-          res.status(404).json({ message: "No user found with this id" });
+          res.status(404).json({ message: "No user associated with that ID. Please try again." });
           return;
         }
         res.json(dbUserData);
@@ -26,22 +25,19 @@ module.exports = {
       .catch(err => res.status(500).json(err));
   },
   
-  // create a new user
-  //use path /api/users/ with body expecting username and email (must be valid unique email address)
+  // CREATE a NEW user
   createUser(req, res) {
     User.create(req.body)
       .then((dbUserData) => res.json(dbUserData))
       .catch(err => res.status(500).json(err));
   },
 
-  
-  //update a single user by Id
-  //use path /api/users/userId with body expecting username and email (must be valid unique email address)
+  // UPDATE a SINGLE user by Id
   updateSingleUser({ params, body }, res)  {
     User.findOneAndUpdate({ _id: params.userId }, body, { runValidators: true })
     .then((dbUserData) => {
       if(!dbUserData) {
-        res.status(404).json({ message: "No user found with this id" });
+        res.status(404).json({ message: "No user associated with that ID. Please try again." });
         return;
       }
       res.json (dbUserData);
@@ -49,13 +45,12 @@ module.exports = {
     .catch(err => res.status(500).json(err));  
   },
 
-  //delete a single user by Id
-  //use path /api/users/userId
+  // DELETE a SINGLE user by Id
   deleteSingleUser({ params }, res) {
     User.findOneAndDelete({ _id: params.userId })
     .then(dbUserData => {
       if(!dbUserData) {
-        res.status(404).json ({ message: "No user found with this id" });
+        res.status(404).json ({ message: "No user associated with that ID. Please try again." });
         return;
       }
       User.updateMany({ _id: { $in: dbUserData.friends }},
@@ -73,9 +68,7 @@ module.exports = {
     .catch(err => res.status(500).json(err));
   },
 
-  
-  //add a Friend by Id
-  //use path /api/users/userId/friends/friendId
+  // ADD a FRIEND by ID
   addFriend(req, res) {
 
     User.findOneAndUpdate(
@@ -85,7 +78,7 @@ module.exports = {
     ) 
     .then(dbUserData => {
       if(!dbUserData) {
-        res.status(404).json({ message: "No user found with this Id" })
+        res.status(404).json({ message: "No user associated with that ID. Please try again." })
         return;
       }
       res.json(dbUserData);
@@ -93,7 +86,7 @@ module.exports = {
     .catch(err => res.status(500).json(err));
   },
 
-  //delete a friend by Id
+  // DELETE a FRIEND by ID
   //use route /api/users/userId/friends/friendId
   deleteFriend({ params}, res) {
     User.findOneAndUpdate(
