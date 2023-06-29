@@ -70,7 +70,6 @@ module.exports = {
 
   // ADD a FRIEND by ID
   addFriend(req, res) {
-
     User.findOneAndUpdate(
       { _id: req.params.userId },
       { $addToSet: { friends: req.params.friendId }},
@@ -87,13 +86,8 @@ module.exports = {
   },
 
   // DELETE a FRIEND by ID
-  //use route /api/users/userId/friends/friendId
   deleteFriend({ params}, res) {
-    User.findOneAndUpdate(
-      { _id: params.userId },
-      { $pull: { friends: params.friendId }},
-      { new: true, runValidators: true }
-      )
+    User.findOneAndUpdate( { _id: params.userId }, { $pull: { friends: params.friendId }}, { new: true, runValidators: true } )
       .then(dbUserData => {
         if(!dbUserData) {
           res.status(404).json({ message: "No user found with this Id" });
