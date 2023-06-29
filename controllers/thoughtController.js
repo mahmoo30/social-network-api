@@ -71,7 +71,7 @@ module.exports = {
     Thought.findOneAndUpdate( { _id: params.thoughtId }, { $addToSet: { reactions:  body }}, { new: true, runValidators: true } )
       .then(dbThoughtData => {
         if(!dbThoughtData) {
-          res.status(404).json({ message: "No thought found with this Id" });
+          res.status(404).json({ message: "No thought associated with that ID. Please try again." });
           return;
         }
         res.json(dbThoughtData);
@@ -84,7 +84,7 @@ module.exports = {
     Thought.findOneAndUpdate( { _id: params.thoughtId }, { $pull: { reactions: { reactionId: params.reactionId }}}, { new: true, runValidators: true } )
     .then(dbThoughtData => {
       if(!dbThoughtData) {
-        res.status(404).json({ message: "No thought found with this Id" });
+        res.status(404).json({ message: "No thought associated with that ID. Please try again." });
         return;
       }
       res.json({ message: "Successfully deleted the reaction" });
