@@ -48,4 +48,4 @@ You can find more of my work on GitHub: [mahmoo30](https://github.com/mahmoo30)
 
 #### This README was generated using a [README-generator](https://github.com/mahmoo30/readmegenerator) 🔥🔥🔥
 
-[![Watch the video](https://drive.google.com/file/d/1THbcWSsAFD1-auJswZqelkEs2JfMZq0g/view)]
+![Watch the video](https://drive.google.com/file/d/1THbcWSsAFD1-auJswZqelkEs2JfMZq0g/view)
